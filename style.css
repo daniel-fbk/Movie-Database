@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  display: flex;
+}
+
+#bookmarks {
+  background-color: #20262c;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-container {
+}
