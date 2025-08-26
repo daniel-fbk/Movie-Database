@@ -6,6 +6,8 @@
 
 main {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #bookmarks {
@@ -15,4 +17,13 @@ main {
 }
 
 .movie-container {
+  border: solid 1px red;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.poster {
+  height: 300px;
 }
