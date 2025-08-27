@@ -6,24 +6,52 @@
 
 main {
   display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(206, 206, 206);
+}
+
+h1,
+p {
+  color: rgb(245, 245, 245);
+}
+
+#movie-section {
+  display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 #bookmarks {
-  background-color: #20262c;
-  display: flex;
-  flex-direction: column;
+  padding: 10px;
+  width: 15rem;
+  height: 95vh;
+  background-color: green;
 }
 
 .movie-container {
-  border: solid 1px red;
-  width: 70%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 55%;
+  background-color: rgb(22, 22, 22);
 }
 
 .poster {
   height: 300px;
+}
+
+#bookmark-button {
+  background-color: #ffcc00;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 10rem;
+}
+#bookmark-button:hover {
+  background-color: #e6b800;
 }

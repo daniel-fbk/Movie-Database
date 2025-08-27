@@ -15,6 +15,10 @@ Destructuring to get relevant values from objects and arrays
 */
 
 const movieContainer = document.querySelector(".movie-container");
+const bookmarksContainer = document.getElementById("bookmarks");
+const bookmarkBtn = document.getElementById("bookmark-button");
+
+let movies = [];
 
 const API_POPULAR_MOVIES_URL =
   "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
@@ -49,7 +53,6 @@ async function fetchMovieDetails() {
     `https://api.themoviedb.org/3/movie/${movieId}`,
     options
   );
-
   try {
     const data = await response.json();
     if (response.status === 200) {
@@ -62,6 +65,32 @@ async function fetchMovieDetails() {
     console.log("Error", error);
   }
 }
+
+// I want to store the object returned from fetchMovieDetails() in a variable usable elsewhere
+
+// const aPromise = async () => {
+//   notPromise = await fetchMovieDetails();
+//   console.log("test1", notPromise);
+// };
+
+// let currentMovie = fetchMovieDetails();
+// console.log("test2", currentMovie);
+
+// console.log("test3", aPromise);
+
+const saveBookmarkToStorage = () => {
+  localStorage.setItem("movies", JSON.stringify(movies));
+};
+
+bookmarkBtn.addEventListener("click", () => {
+  const currentMovieTitle = currentMovie.title;
+
+  movies.push({
+    title: currentMovieTitle,
+  });
+  saveBookmarkToStorage();
+  renderPage();
+});
 
 const buildPage = async (movie) => {
   const posterContainer = document.createElement("div");
@@ -104,7 +133,7 @@ const buildPage = async (movie) => {
   ratingStar.classList.add("rating-star");
   rating.classList.add("rating");
 
-  const revenue = document.createElement("div");
+  const revenue = document.createElement("p");
   revenue.classList.add("revenue");
   revenue.textContent = `$${movie.revenue}`;
 
@@ -114,32 +143,9 @@ const buildPage = async (movie) => {
   homePage.href = movie.homepage;
   homePage.target = "_blank";
 
-  // const crewContainer = document.createElement("div");
-  // const crewList = document.createElement("ul");
-  // const director = document.createElement("li");
-  // const writers = document.createElement("li");
-  // const stars = document.createElement("li");
-  // crewContainer.classList.add("crew-container");
-  // crewList.classList.add("crew-list");
-  // director.classList.add("director");
-  // writers.classList.add("writers");
-  // stars.classList.add("stars");
-
-  // const videosContainer = document.createElement("section");
-  // const videosHeading = document.createElement("h3");
-  // const video = document.createElement("div");
-  // const videoPlayBtn = document.createElement("img");
-  // videosContainer.classList.add("videos-container");
-  // videosHeading.classList.add("videos-heading");
-  // video.classList.add("video");
-  // videoPlayBtn.classList.add("video-play-button");
-
-  // const photosContainer = document.createElement("section");
-  // const photosTitle = document.createElement("h3");
-  // const photo = document.createElement("div");
-  // photosContainer.classList.add("photos-container");
-  // photosTitle.classList.add("photos-title");
-  // photo.classList.add("photo");
+  // const bookmarkBtn = document.createElement("button");
+  // bookmarkBtn.classList.add("bookmark-button");
+  // bookmarkBtn.textContent = "Bookmark";
 
   movieContainer.append(
     posterContainer,
@@ -151,7 +157,8 @@ const buildPage = async (movie) => {
     runTime,
     ratingContainer,
     revenue,
-    homePage
+    homePage,
+    bookmarkBtn
   );
   posterContainer.append(poster);
   ratingContainer.append(ratingStar, rating);
@@ -163,3 +170,30 @@ async function renderPage() {
 }
 
 renderPage();
+
+// const crewContainer = document.createElement("div");
+// const crewList = document.createElement("ul");
+// const director = document.createElement("li");
+// const writers = document.createElement("li");
+// const stars = document.createElement("li");
+// crewContainer.classList.add("crew-container");
+// crewList.classList.add("crew-list");
+// director.classList.add("director");
+// writers.classList.add("writers");
+// stars.classList.add("stars");
+
+// const videosContainer = document.createElement("section");
+// const videosHeading = document.createElement("h3");
+// const video = document.createElement("div");
+// const videoPlayBtn = document.createElement("img");
+// videosContainer.classList.add("videos-container");
+// videosHeading.classList.add("videos-heading");
+// video.classList.add("video");
+// videoPlayBtn.classList.add("video-play-button");
+
+// const photosContainer = document.createElement("section");
+// const photosTitle = document.createElement("h3");
+// const photo = document.createElement("div");
+// photosContainer.classList.add("photos-container");
+// photosTitle.classList.add("photos-title");
+// photo.classList.add("photo");
