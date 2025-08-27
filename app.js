@@ -16,7 +16,7 @@ Destructuring to get relevant values from objects and arrays
 
 const movieContainer = document.querySelector(".movie-container");
 const bookmarksContainer = document.getElementById("bookmarks");
-const bookmarkList = document.getElementById("bookmark-list");
+const bookmarksList = document.getElementById("bookmarks-list");
 const bookmarkBtn = document.getElementById("bookmark-button");
 
 let movies = [];
@@ -69,25 +69,9 @@ async function fetchMovieDetails() {
 
 let currentMovie = await fetchMovieDetails();
 
-const bookmarkButton = () => {
-  const bookmarkBtn = document.createElement("button");
-  bookmarkBtn.classList.add("bookmark-button");
-  bookmarkBtn.textContent = "Bookmark";
-  return bookmarkBtn;
-};
-
 const saveBookmarkToStorage = () => {
   localStorage.setItem("movies", JSON.stringify(movies));
 };
-
-bookmarkButton().addEventListener("click", () => {
-  movies.push({
-    currentMovie,
-  });
-  console.log(movies);
-  saveBookmarkToStorage();
-  renderPage();
-});
 
 const buildPage = async (movie) => {
   movieContainer.replaceChildren();
@@ -141,10 +125,18 @@ const buildPage = async (movie) => {
   homePage.href = movie.homepage;
   homePage.target = "_blank";
 
-  movies.forEach(() => {
-    const li = document.createElement("li");
-    li.textContent = currentMovie.title;
-    list.append(li);
+  const bookmarkBtn = document.createElement("button");
+  bookmarkBtn.classList.add("bookmark-button");
+  bookmarkBtn.textContent = "Bookmark";
+
+  bookmarkBtn.addEventListener("click", () => {
+    if (!movies.includes(movie.title)) {
+      movies.push(movie.title);
+      saveBookmarkToStorage();
+      renderBookmarks();
+    } else {
+      console.log("Movie is already in bookmarks");
+    }
   });
 
   movieContainer.append(
@@ -157,9 +149,9 @@ const buildPage = async (movie) => {
     runTime,
     ratingContainer,
     revenue,
-    homePage,
-    bookmarkButton()
+    homePage
   );
+  movieContainer.prepend(bookmarkBtn);
   posterContainer.append(poster);
   ratingContainer.append(ratingStar, rating);
 };
@@ -171,8 +163,18 @@ async function renderPage() {
   const bookmarkedMovies = localStorage.getItem("movies");
   if (bookmarkedMovies) {
     movies = JSON.parse(bookmarkedMovies);
+    renderBookmarks();
   }
 }
+
+const renderBookmarks = () => {
+  bookmarksList.replaceChildren();
+  movies.forEach((movie) => {
+    const li = document.createElement("li");
+    li.textContent = movie;
+    bookmarksList.append(li);
+  });
+};
 
 renderPage();
 

@@ -27,7 +27,7 @@ p {
 
 #bookmarks {
   padding: 10px;
-  width: 15rem;
+  width: 20rem;
   height: 95vh;
   background-color: green;
 }
@@ -36,8 +36,9 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 55%;
+  width: 60%;
   background-color: rgb(22, 22, 22);
+  border: solid 1.5px black;
 }
 
 .poster {
