@@ -16,6 +16,7 @@ Destructuring to get relevant values from objects and arrays
 
 const movieContainer = document.querySelector(".movie-container");
 const bookmarksContainer = document.getElementById("bookmarks");
+const bookmarkList = document.getElementById("bookmark-list");
 const bookmarkBtn = document.getElementById("bookmark-button");
 
 let movies = [];
@@ -66,33 +67,30 @@ async function fetchMovieDetails() {
   }
 }
 
-// I want to store the object returned from fetchMovieDetails() in a variable usable elsewhere
+let currentMovie = await fetchMovieDetails();
 
-// const aPromise = async () => {
-//   notPromise = await fetchMovieDetails();
-//   console.log("test1", notPromise);
-// };
-
-// let currentMovie = fetchMovieDetails();
-// console.log("test2", currentMovie);
-
-// console.log("test3", aPromise);
+const bookmarkButton = () => {
+  const bookmarkBtn = document.createElement("button");
+  bookmarkBtn.classList.add("bookmark-button");
+  bookmarkBtn.textContent = "Bookmark";
+  return bookmarkBtn;
+};
 
 const saveBookmarkToStorage = () => {
   localStorage.setItem("movies", JSON.stringify(movies));
 };
 
-bookmarkBtn.addEventListener("click", () => {
-  const currentMovieTitle = currentMovie.title;
-
+bookmarkButton().addEventListener("click", () => {
   movies.push({
-    title: currentMovieTitle,
+    currentMovie,
   });
+  console.log(movies);
   saveBookmarkToStorage();
   renderPage();
 });
 
 const buildPage = async (movie) => {
+  movieContainer.replaceChildren();
   const posterContainer = document.createElement("div");
   const poster = document.createElement("img");
   posterContainer.classList.add("poster-container");
@@ -143,9 +141,11 @@ const buildPage = async (movie) => {
   homePage.href = movie.homepage;
   homePage.target = "_blank";
 
-  // const bookmarkBtn = document.createElement("button");
-  // bookmarkBtn.classList.add("bookmark-button");
-  // bookmarkBtn.textContent = "Bookmark";
+  movies.forEach(() => {
+    const li = document.createElement("li");
+    li.textContent = currentMovie.title;
+    list.append(li);
+  });
 
   movieContainer.append(
     posterContainer,
@@ -158,7 +158,7 @@ const buildPage = async (movie) => {
     ratingContainer,
     revenue,
     homePage,
-    bookmarkBtn
+    bookmarkButton()
   );
   posterContainer.append(poster);
   ratingContainer.append(ratingStar, rating);
@@ -167,6 +167,11 @@ const buildPage = async (movie) => {
 async function renderPage() {
   const movieDetails = await fetchMovieDetails();
   await buildPage(movieDetails);
+
+  const bookmarkedMovies = localStorage.getItem("movies");
+  if (bookmarkedMovies) {
+    movies = JSON.parse(bookmarkedMovies);
+  }
 }
 
 renderPage();
