@@ -61,7 +61,7 @@ async function fetchMovieDetails(id) {
   try {
     const data = await response.json();
     if (response.status === 200) {
-      console.log("Movie Details:", data);
+      // console.log("Movie Details:", data);
       return data;
     } else {
       console.log("Server Error", data.error);
@@ -80,8 +80,8 @@ async function fetchSearchMovie(title) {
   try {
     const data = await response.json();
     if (response.status === 200) {
-      const randomIndex = Math.floor(Math.random() * data.results.length);
-      return data.results[randomIndex].id;
+      console.log(data.results[0]);
+      return data.results[0].id;
     } else {
       console.log("Server Error", data.error);
     }
@@ -100,7 +100,8 @@ searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(searchForm);
-  const userInput = formData.get("search-input");
+  let userInput = formData.get("search-input");
+  userInput = userInput.replaceAll(" ", "+");
   searchBar.value = "";
   let findMovie = await fetchSearchMovie(userInput);
   // fetchMovieDetails(findMovie);
@@ -175,7 +176,7 @@ const buildPage = async (movie) => {
 
   const homePage = document.createElement("a");
   homePage.classList.add("homepage");
-  homePage.textContent = `Streaming ${movie.homepage}`;
+  homePage.textContent = `HomePage ${movie.homepage}`;
   homePage.href = movie.homepage;
   homePage.target = "_blank";
 
