@@ -14,13 +14,6 @@ Destructuring to get relevant values from objects and arrays
 
 */
 
-const movieContainer = document.querySelector(".movie-container");
-const bookmarksContainer = document.getElementById("bookmarks");
-const bookmarksList = document.getElementById("bookmarks-list");
-const bookmarkBtn = document.getElementById("bookmark-button");
-
-let movies = [];
-
 const API_POPULAR_MOVIES_URL =
   "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
 
@@ -32,6 +25,18 @@ const options = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTczZDAzZjY5Zjc5YmZhNDJkOTlhN2U1ZjZjNjIwZSIsIm5iZiI6MTc1NTc3ODc0MS4wODksInN1YiI6IjY4YTcwZWI1NTlkMTM4NmQ4MzVkZDgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hWcR1qQQ7kePN_j3xSL0KvfbXMvVYQjUBqgNugG90WU",
   },
 };
+
+const movieContainer = document.querySelector(".movie-container");
+const bookmarksContainer = document.getElementById("bookmarks");
+const bookmarksList = document.getElementById("bookmarks-list");
+const bookmarkBtn = document.getElementById("bookmark-button");
+const searchBar = document.getElementById("search-bar");
+const searchForm = document.getElementById("nav-search-form");
+
+let movies = [];
+
+let currentMovieId = await fetchPopularMovies();
+let currentMovieDetails = await fetchMovieDetails(currentMovieId);
 
 async function fetchPopularMovies() {
   const response = await fetch(API_POPULAR_MOVIES_URL, options);
@@ -48,10 +53,9 @@ async function fetchPopularMovies() {
   }
 }
 
-async function fetchMovieDetails() {
-  const movieId = await fetchPopularMovies();
+async function fetchMovieDetails(id) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}`,
+    `https://api.themoviedb.org/3/movie/${id}`,
     options
   );
   try {
@@ -67,10 +71,60 @@ async function fetchMovieDetails() {
   }
 }
 
-let currentMovie = await fetchMovieDetails();
+async function fetchSearchMovie(title) {
+  let lowerTitle = title.toLowerCase();
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${lowerTitle}`,
+    options
+  );
+  try {
+    const data = await response.json();
+    if (response.status === 200) {
+      const randomIndex = Math.floor(Math.random() * data.results.length);
+      return data.results[randomIndex].id;
+    } else {
+      console.log("Server Error", data.error);
+    }
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
+
+// fetchSearchMovie(currentMovieDetails.title);
 
 const saveBookmarkToStorage = () => {
   localStorage.setItem("movies", JSON.stringify(movies));
+};
+
+searchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(searchForm);
+  const userInput = formData.get("search-input");
+  searchBar.value = "";
+  let findMovie = await fetchSearchMovie(userInput);
+  // fetchMovieDetails(findMovie);
+  renderPage(findMovie);
+  currentMovieDetails = await fetchMovieDetails(findMovie);
+});
+
+const bookmarkButton = () => {
+  const bookmarkBtn = document.createElement("button");
+  bookmarkBtn.classList.add("bookmark-button");
+  bookmarkBtn.textContent = "Bookmark";
+
+  bookmarkBtn.addEventListener("click", () => {
+    if (!movies.includes(currentMovieDetails.title)) {
+      movies.push(currentMovieDetails.title);
+      saveBookmarkToStorage();
+      renderBookmarks();
+    } else {
+      console.log("Movie is already in bookmarks");
+      console.log(currentMovieDetails.title);
+    }
+  });
+
+  return bookmarkBtn;
 };
 
 const buildPage = async (movie) => {
@@ -121,23 +175,9 @@ const buildPage = async (movie) => {
 
   const homePage = document.createElement("a");
   homePage.classList.add("homepage");
-  homePage.textContent = movie.homepage;
+  homePage.textContent = `Streaming ${movie.homepage}`;
   homePage.href = movie.homepage;
   homePage.target = "_blank";
-
-  const bookmarkBtn = document.createElement("button");
-  bookmarkBtn.classList.add("bookmark-button");
-  bookmarkBtn.textContent = "Bookmark";
-
-  bookmarkBtn.addEventListener("click", () => {
-    if (!movies.includes(movie.title)) {
-      movies.push(movie.title);
-      saveBookmarkToStorage();
-      renderBookmarks();
-    } else {
-      console.log("Movie is already in bookmarks");
-    }
-  });
 
   movieContainer.append(
     posterContainer,
@@ -151,13 +191,13 @@ const buildPage = async (movie) => {
     revenue,
     homePage
   );
-  movieContainer.prepend(bookmarkBtn);
+  movieContainer.prepend(bookmarkButton());
   posterContainer.append(poster);
   ratingContainer.append(ratingStar, rating);
 };
 
-async function renderPage() {
-  const movieDetails = await fetchMovieDetails();
+async function renderPage(id) {
+  const movieDetails = await fetchMovieDetails(id);
   await buildPage(movieDetails);
 
   const bookmarkedMovies = localStorage.getItem("movies");
@@ -176,7 +216,7 @@ const renderBookmarks = () => {
   });
 };
 
-renderPage();
+renderPage(currentMovieId);
 
 // const crewContainer = document.createElement("div");
 // const crewList = document.createElement("ul");

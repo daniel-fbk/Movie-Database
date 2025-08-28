@@ -9,19 +9,24 @@
   </head>
   <body>
     <header>
-      <input type="text" id="search-bar" placeholder="Search Movie..." />
+      <form id="nav-search-form">
+        <input
+          type="text"
+          name="search-input"
+          autocomplete="off"
+          id="search-bar"
+          placeholder="Search Movie..."
+        />
+        <input type="submit" id="submit" value="Search" />
+      </form>
     </header>
     <main>
       <aside id="bookmarks">
-        <p>Bookmarks List</p>
+        <h3>Bookmarks List</h3>
         <ul id="bookmarks-list"></ul>
       </aside>
       <section id="movie-section">
-        <article class="movie-container">
-          <!-- <button id="bookmark-button">
-            <p>Bookmark</p>
-          </button> -->
-        </article>
+        <article class="movie-container"></article>
       </section>
     </main>
   </body>

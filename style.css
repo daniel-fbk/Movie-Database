@@ -6,6 +6,7 @@
 
 main {
   display: flex;
+  background-color: gray;
 }
 
 a {
@@ -14,8 +15,26 @@ a {
 }
 
 h1,
+h3,
 p {
   color: rgb(245, 245, 245);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  background-color: #ffcc00;
+}
+
+#search-bar {
+  height: 2rem;
+  width: 20rem;
+  margin: 1rem;
+}
+
+#submit {
+  height: 2rem;
+  width: 10ch;
 }
 
 #movie-section {
