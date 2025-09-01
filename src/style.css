@@ -29,12 +29,25 @@ header {
 #search-bar {
   height: 2rem;
   width: 20rem;
-  margin: 1rem;
 }
 
 #submit {
   height: 2rem;
   width: 10ch;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#nav-search-form {
+  position: relative;
+}
+
+#live-search-dropdown {
+  /* display: none; */
+  background-color: aqua;
+  width: 20rem;
+  height: 20rem;
+  position: absolute;
 }
 
 #movie-section {

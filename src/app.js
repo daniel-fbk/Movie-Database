@@ -14,17 +14,16 @@ Destructuring to get relevant values from objects and arrays
 
 */
 
-const API_POPULAR_MOVIES_URL =
-  "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
-
 const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTczZDAzZjY5Zjc5YmZhNDJkOTlhN2U1ZjZjNjIwZSIsIm5iZiI6MTc1NTc3ODc0MS4wODksInN1YiI6IjY4YTcwZWI1NTlkMTM4NmQ4MzVkZDgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hWcR1qQQ7kePN_j3xSL0KvfbXMvVYQjUBqgNugG90WU",
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER}`,
   },
 };
+
+const API_POPULAR_MOVIES_URL =
+  "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
 
 const movieContainer = document.querySelector(".movie-container");
 const bookmarksContainer = document.getElementById("bookmarks");
@@ -32,6 +31,7 @@ const bookmarksList = document.getElementById("bookmarks-list");
 const bookmarkBtn = document.getElementById("bookmark-button");
 const searchBar = document.getElementById("search-bar");
 const searchForm = document.getElementById("nav-search-form");
+const liveSearchDropdown = document.getElementById("live-search-dropdown");
 
 let movies = [];
 
@@ -72,9 +72,8 @@ async function fetchMovieDetails(id) {
 }
 
 async function fetchSearchMovie(title) {
-  let lowerTitle = title.toLowerCase();
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${lowerTitle}`,
+    `https://api.themoviedb.org/3/search/movie?query=${title}`,
     options
   );
   try {
@@ -90,8 +89,6 @@ async function fetchSearchMovie(title) {
   }
 }
 
-// fetchSearchMovie(currentMovieDetails.title);
-
 const saveBookmarkToStorage = () => {
   localStorage.setItem("movies", JSON.stringify(movies));
 };
@@ -101,12 +98,34 @@ searchForm.addEventListener("submit", async (e) => {
 
   const formData = new FormData(searchForm);
   let userInput = formData.get("search-input");
-  userInput = userInput.replaceAll(" ", "+");
+  if (!userInput) {
+    return;
+  }
   searchBar.value = "";
   let findMovie = await fetchSearchMovie(userInput);
-  // fetchMovieDetails(findMovie);
   renderPage(findMovie);
   currentMovieDetails = await fetchMovieDetails(findMovie);
+});
+
+searchBar.addEventListener("input", async () => {
+  const query = searchBar.value;
+
+  if (query.length < 2) {
+    liveSearchDropdown.style.display = "none";
+    return;
+  }
+  const suggestions = await fetchSearchMovie(currentMovieId);
+
+  suggestions.forEach((movie) => {
+    // Poster, Title, Release Year, 2 actors
+    const suggestedMovie = createElement("div");
+    const posterContainer = createElement("div");
+    const suggestedMoviePoster = createElement("img");
+    suggestedMoviePoster.classList.add("suggested-movie-poster");
+    suggestedMoviePoster.src = movie.poster_path;
+    suggestedMovie.append(suggestedMoviePoster);
+    liveSearchDropdown.append(suggestedMovie);
+  });
 });
 
 const bookmarkButton = () => {
@@ -120,8 +139,7 @@ const bookmarkButton = () => {
       saveBookmarkToStorage();
       renderBookmarks();
     } else {
-      console.log("Movie is already in bookmarks");
-      console.log(currentMovieDetails.title);
+      alert(`${currentMovieDetails.title} is already in bookmarks`);
     }
   });
 
