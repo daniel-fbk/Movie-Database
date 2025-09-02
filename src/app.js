@@ -14,8 +14,9 @@ Destructuring to get relevant values from objects and arrays
 
 */
 
-// require("dotenv").config();
-const apiKey = process.env.API_KEY;
+import "./style.css";
+
+const apiKey = API_KEY;
 
 // Import modules
 import { fetchMoviesPopular } from "./fetchMoviesPopular.js";
