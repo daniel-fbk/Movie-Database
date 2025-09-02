@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --public-url ./ --define \"API_KEY=process.env.API_KEY\"",
+    "build": "parcel build index.html --public-url ./ --define API_KEY=process.env.API_KEY",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
