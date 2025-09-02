@@ -43,7 +43,7 @@ header {
 }
 
 #live-search-dropdown {
-  /* display: none; */
+  display: none;
   background-color: aqua;
   width: 20rem;
   height: 20rem;
