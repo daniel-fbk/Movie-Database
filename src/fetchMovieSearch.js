@@ -5,7 +5,7 @@ const searchForm = document.getElementById("nav-search-form");
 const searchBar = document.getElementById("search-bar");
 const liveSearchDropdown = document.getElementById("live-search-dropdown");
 
-const apiKey = "1488bcbfe94f3af062a3346d2b7a6f4e";
+const apiKey = process.env.API_KEY;
 
 export const fetchMovieSearch = async (title, apiKey) => {
   const response = await fetch(
