@@ -16,7 +16,7 @@ export const fetchMovieSearch = async (title, apiKey) => {
   fetchMovieDetails(results, apiKey);
 };
 
-searchForm.addEventListener("submit", async (e) => {
+export const handleSearch = searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(searchForm);
@@ -27,6 +27,20 @@ searchForm.addEventListener("submit", async (e) => {
   searchBar.value = "";
   fetchMovieSearch(userInput, apiKey);
 });
+
+// searchForm.addEventListener("submit", async (e) => {
+//   e.preventDefault();
+
+//   const formData = new FormData(searchForm);
+//   let userInput = formData.get("search-input");
+//   if (!userInput) {
+//     return;
+//   }
+//   searchBar.value = "";
+//   let findMovie = await fetchSearchMovie(userInput);
+//   renderPage(findMovie);
+//   currentMovieDetails = await fetchMovieDetails(findMovie);
+// });
 
 // searchBar.addEventListener("input", async () => {
 //   const query = searchBar.value;

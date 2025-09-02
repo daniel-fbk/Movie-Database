@@ -19,8 +19,11 @@ import "./style.css";
 const apiKey = process.env.API_KEY;
 
 // Import modules
+import "./fetchMovieSearch.js";
 import { fetchMoviesPopular } from "./fetchMoviesPopular.js";
 import { loadBookmarks } from "./handleBookmarkStorage.js";
+
+//Event Listeners
 
 fetchMoviesPopular(apiKey);
 loadBookmarks();
