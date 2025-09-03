@@ -33,6 +33,16 @@
           </select>
           <button id="delete-bookmarks">Delete Bookmarks</button>
         </div>
+        <label for="min-popularity">Minimum Popularity:</label>
+        <input
+          type="range"
+          id="min-popularity"
+          min="0"
+          max="1000"
+          step="1"
+          value="0"
+        />
+        <span id="min-pop-value">0</span>
         <ul id="bookmarks-list"></ul>
       </aside>
       <section id="movie-section">

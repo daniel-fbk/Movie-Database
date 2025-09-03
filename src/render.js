@@ -11,7 +11,12 @@ export const renderPage = async (movie) => {
 export const renderBookmarks = (bookmarks) => {
   bookmarksList.replaceChildren();
   const filters = getFilters();
-  const sorted = sortBookmarks(bookmarks, filters.sortType);
+
+  const filtered = bookmarks.filter(
+    (movie) => (movie.popularity || 0) >= (filters.minPopularity || 0)
+  );
+  const sorted = sortBookmarks(filtered, filters.sortType);
+
   sorted.forEach((movie) => {
     const li = document.createElement("li");
     li.textContent = movie.title;

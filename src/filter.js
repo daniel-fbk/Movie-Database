@@ -3,14 +3,21 @@ import { renderBookmarks } from "./render.js";
 
 const setSortBy = document.getElementById("sort-by");
 
+const minPopSlider = document.getElementById("min-popularity");
+const minPopValue = document.getElementById("min-pop-value");
+
+// const filters = getFilters();
+// setSortBy.value = filters.sortType;
+
 const filters = getFilters();
-setSortBy.value = filters.sortType;
+setSortBy.value = filters.sortType || "";
+minPopSlider.value = filters.minPopularity || 0;
+minPopValue.textContent = filters.minPopularity || 0;
 
 setSortBy.addEventListener("change", (e) => {
   filters.sortType = e.target.value;
   saveFilters(filters);
-  const bookmarks = getBookmarks();
-  renderBookmarks(bookmarks);
+  renderBookmarks(getBookmarks());
 });
 
 export const sortBookmarks = (bookmarks, sortType) => {
@@ -22,3 +29,11 @@ export const sortBookmarks = (bookmarks, sortType) => {
     return 0;
   });
 };
+
+minPopSlider.addEventListener("input", (e) => {
+  const value = Number(e.target.value);
+  minPopValue.textContent = value;
+  filters.minPopularity = value;
+  saveFilters(filters);
+  renderBookmarks(getBookmarks());
+});
