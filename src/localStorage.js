@@ -1,6 +1,14 @@
 import { renderBookmarks } from "./render.js";
 
+const deleteBookmarksBtn = document.getElementById("delete-bookmarks");
+
 let movies = [];
+
+deleteBookmarksBtn.addEventListener("click", () => {
+  movies = [];
+  localStorage.setItem("movies", JSON.stringify(movies));
+  renderBookmarks(movies);
+});
 
 export const saveBookmarks = () => {
   localStorage.setItem("movies", JSON.stringify(movies));
