@@ -5,6 +5,7 @@ const movieContainer = document.querySelector(".movie-container");
 export const buildPage = async (movie) => {
   const movieData = movie;
   const { title, popularity } = movieData;
+  console.log(movie);
   console.log(title, popularity);
   movieContainer.replaceChildren();
   const posterContainer = document.createElement("div");
@@ -15,7 +16,7 @@ export const buildPage = async (movie) => {
 
   const movieTitle = document.createElement("h1");
   movieTitle.classList.add("movie-title");
-  movieTitle.textContent = movie.title;
+  movieTitle.textContent = title;
 
   const genresContainer = document.createElement("div");
   genresContainer.classList.add("genres-container");
@@ -59,7 +60,7 @@ export const buildPage = async (movie) => {
 
   movieContainer.append(
     posterContainer,
-    title,
+    movieTitle,
     genresContainer,
     description,
     releaseDate,

@@ -11,7 +11,16 @@ main {
 
 a {
   text-decoration: none;
-  color: rgb(255, 0, 0);
+  color: rgb(64, 119, 154);
+}
+
+#menu {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  list-style: none;
 }
 
 h1,
