@@ -1,8 +1,11 @@
-import { bookmarkButton } from "./handleBookmarkStorage.js";
+import { bookmarkButton } from "./localStorage.js";
 
 const movieContainer = document.querySelector(".movie-container");
 
 export const buildPage = async (movie) => {
+  const movieData = movie;
+  const { title, popularity } = movieData;
+  console.log(title, popularity);
   movieContainer.replaceChildren();
   const posterContainer = document.createElement("div");
   const poster = document.createElement("img");
@@ -10,9 +13,9 @@ export const buildPage = async (movie) => {
   poster.classList.add("poster");
   poster.src = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
 
-  const title = document.createElement("h1");
-  title.classList.add("movie-title");
-  title.textContent = movie.title;
+  const movieTitle = document.createElement("h1");
+  movieTitle.classList.add("movie-title");
+  movieTitle.textContent = movie.title;
 
   const genresContainer = document.createElement("div");
   genresContainer.classList.add("genres-container");
@@ -66,7 +69,7 @@ export const buildPage = async (movie) => {
     revenue,
     homePage
   );
-  movieContainer.prepend(bookmarkButton(movie.title));
+  movieContainer.prepend(bookmarkButton(title, popularity));
   posterContainer.append(poster);
   ratingContainer.append(ratingStar, rating);
 };

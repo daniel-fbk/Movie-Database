@@ -23,6 +23,16 @@
     <main>
       <aside id="bookmarks">
         <h3>Bookmarks List</h3>
+        <div id="menu">
+          <label for="sort-by">Filter</label>
+          <select name="sort-by" id="sort-by">
+            <option>Select Filter</option>
+            <option value="most-popular">Most Popular</option>
+            <option value="least-popular">Least Popular</option>
+            <option value="alpha-asc">A to Z</option>
+            <option value="alpha-desc">Z to A</option>
+          </select>
+        </div>
         <ul id="bookmarks-list"></ul>
       </aside>
       <section id="movie-section">

@@ -21,9 +21,9 @@ const apiKey = process.env.API_KEY;
 // Import modules
 import "./fetchMovieSearch.js";
 import { fetchMoviesPopular } from "./fetchMoviesPopular.js";
-import { loadBookmarks } from "./handleBookmarkStorage.js";
+import { getBookmarks } from "./localStorage.js";
 
 //Event Listeners
 
 fetchMoviesPopular(apiKey);
-loadBookmarks();
+getBookmarks();
