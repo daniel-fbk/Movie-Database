@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang=en><link rel=stylesheet href=Movie-Database.014d88c2.css><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>Document</title><script type=module src=Movie-Database.4fd493ef.js></script><body>
+<!DOCTYPE html><html lang=en><link rel=stylesheet href=Movie-Database.014d88c2.css><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>Document</title><script type=module src=Movie-Database.da79a750.js></script><body>
     <header>
       <form id=nav-search-form>
         <input name=search-input autocomplete=off id=search-bar placeholder="Search Movie...">
@@ -9,6 +9,16 @@
     <main>
       <aside id=bookmarks>
         <h3>Bookmarks List</h3>
+        <div id=menu>
+          <label for=sort-by>Filter</label>
+          <select name=sort-by id=sort-by>
+            <option>Select Filter</option>
+            <option value=most-popular>Most Popular</option>
+            <option value=least-popular>Least Popular</option>
+            <option value=alpha-asc>A to Z</option>
+            <option value=alpha-desc>Z to A</option>
+          </select>
+        </div>
         <ul id=bookmarks-list></ul>
       </aside>
       <section id=movie-section>
