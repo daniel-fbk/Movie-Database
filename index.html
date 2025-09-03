@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang=en><link rel=stylesheet href=Movie-Database.d842ae73.css><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>Document</title><script type=module src=Movie-Database.1cb589c4.js></script><body>
+<!DOCTYPE html><html lang=en><link rel=stylesheet href=Movie-Database.d842ae73.css><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>Document</title><script type=module src=Movie-Database.cf88b810.js></script><body>
     <header>
       <form id=nav-search-form>
         <input name=search-input autocomplete=off id=search-bar placeholder="Search Movie...">
@@ -19,6 +19,9 @@
           </select>
           <button id=delete-bookmarks>Delete Bookmarks</button>
         </div>
+        <label for=min-popularity>Minimum Popularity:</label>
+        <input type=range id=min-popularity min=0 max=1000 step=1 value=0>
+        <span id=min-pop-value>0</span>
         <ul id=bookmarks-list></ul>
       </aside>
       <section id=movie-section>
