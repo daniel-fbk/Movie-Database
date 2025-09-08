@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900");
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: roboto;
 }
 
 main {
@@ -37,7 +40,7 @@ header {
 
 #search-bar {
   height: 2rem;
-  width: 20rem;
+  width: 40rem;
 }
 
 #submit {
@@ -52,11 +55,41 @@ header {
 }
 
 #live-search-dropdown {
-  display: none;
-  background-color: aqua;
-  width: 20rem;
-  height: 20rem;
+  /* display: none; */
+  background-color: #313131;
+  width: 40rem;
   position: absolute;
+}
+
+.suggested-container {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  border-bottom: 1px solid #656565;
+}
+
+.suggested-poster-container {
+  height: 80%;
+  width: 55px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 15px 0 7px;
+}
+
+.suggested-poster {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.suggested-info {
+  color: rgb(181, 181, 181);
+  font-size: 14px;
+}
+
+.suggested-year {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
 }
 
 #movie-section {
@@ -70,7 +103,7 @@ header {
   padding: 10px;
   width: 20rem;
   height: 95vh;
-  background-color: green;
+  background-color: rgb(50, 50, 50);
 }
 
 .movie-container {

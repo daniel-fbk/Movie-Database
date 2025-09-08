@@ -5,8 +5,6 @@ const movieContainer = document.querySelector(".movie-container");
 export const buildPage = async (movie) => {
   const movieData = movie;
   const { title, popularity } = movieData;
-  console.log(movie);
-  console.log(title, popularity);
   movieContainer.replaceChildren();
   const posterContainer = document.createElement("div");
   const poster = document.createElement("img");

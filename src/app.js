@@ -16,8 +16,6 @@ Destructuring to get relevant values from objects and arrays
 
 import "./style.css";
 
-const apiKey = process.env.API_KEY;
-
 // Import modules
 import "./fetchMovieSearch.js";
 import { fetchMoviesPopular } from "./fetchMoviesPopular.js";
@@ -25,5 +23,5 @@ import { getBookmarks } from "./localStorage.js";
 
 //Event Listeners
 
-fetchMoviesPopular(apiKey);
+fetchMoviesPopular();
 getBookmarks();
