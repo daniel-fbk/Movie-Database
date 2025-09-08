@@ -3,51 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Ruby Movies DB</title>
     <script type="module" src="/src/app.js"></script>
   </head>
   <body>
-    <header>
-      <form id="nav-search-form">
-        <input
-          type="text"
-          name="search-input"
-          autocomplete="off"
-          id="search-bar"
-          placeholder="Search Movie..."
-        />
-        <input type="submit" id="submit" value="Search" />
-        <div id="live-search-dropdown"></div>
-      </form>
-    </header>
-    <main>
-      <aside id="bookmarks">
-        <h3>Bookmarks List</h3>
-        <div id="menu">
-          <select name="sort-by" id="sort-by">
-            <option>Select Filter</option>
-            <option value="most-popular">Most Popular</option>
-            <option value="least-popular">Least Popular</option>
-            <option value="alpha-asc">A to Z</option>
-            <option value="alpha-desc">Z to A</option>
-          </select>
-          <button id="delete-bookmarks">Delete Bookmarks</button>
-        </div>
-        <label for="min-popularity">Minimum Popularity:</label>
-        <input
-          type="range"
-          id="min-popularity"
-          min="0"
-          max="1000"
-          step="1"
-          value="0"
-        />
-        <span id="min-pop-value">0</span>
-        <ul id="bookmarks-list"></ul>
-      </aside>
-      <section id="movie-section">
+    <div id="wrapper">
+      <header>
+        <div id="header-bg"></div>
+        <a id="home-name" href="#">
+          <h1>RubyMovies</h1>
+        </a>
+        <form id="nav-search-form">
+          <input
+            type="text"
+            name="search-input"
+            autocomplete="off"
+            id="search-bar"
+            placeholder="Search Movie..."
+          />
+          <input type="submit" id="submit" value="Search" />
+          <div id="live-search-dropdown"></div>
+          <div></div>
+        </form>
+        <a href="">
+          <span class="label">Sign in</span>
+        </a>
+      </header>
+      <main>
+        <aside id="bookmarks">
+          <h3>Bookmarks List</h3>
+          <div id="menu">
+            <select name="sort-by" id="sort-by">
+              <option>Select Filter</option>
+              <option value="most-popular">Most Popular</option>
+              <option value="least-popular">Least Popular</option>
+              <option value="alpha-asc">A to Z</option>
+              <option value="alpha-desc">Z to A</option>
+            </select>
+            <button id="delete-bookmarks">Delete Bookmarks</button>
+          </div>
+          <label for="min-popularity">Minimum Popularity:</label>
+          <input
+            type="range"
+            id="min-popularity"
+            min="0"
+            max="1000"
+            step="1"
+            value="0"
+          />
+          <span id="min-pop-value">0</span>
+          <ul id="bookmarks-list"></ul>
+        </aside>
         <article class="movie-container"></article>
-      </section>
-    </main>
+      </main>
+    </div>
   </body>
 </html>

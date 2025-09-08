@@ -17,7 +17,7 @@ Destructuring to get relevant values from objects and arrays
 import "./style.css";
 
 // Import modules
-import "./fetchMovieSearch.js";
+import { handleSearch } from "./handleSearch.js";
 import { fetchMoviesPopular } from "./fetchMoviesPopular.js";
 import { getBookmarks } from "./localStorage.js";
 

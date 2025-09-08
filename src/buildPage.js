@@ -1,11 +1,25 @@
 import { bookmarkButton } from "./localStorage.js";
+import { fetchMovieImages } from "./fetchMovieImages.js";
 
 const movieContainer = document.querySelector(".movie-container");
+const wrapper = document.getElementById("wrapper");
 
 export const buildPage = async (movie) => {
   const movieData = movie;
   const { title, popularity } = movieData;
   movieContainer.replaceChildren();
+
+  const movieImages = await fetchMovieImages(movieData.id);
+  console.log(movieImages);
+  const backgroundImage =
+    movieImages.backdrops.length > 0
+      ? movieImages.backdrops[0].file_path
+      : movieImages.posters[0].file_path;
+  wrapper.style.setProperty(
+    "--bg-url",
+    `url("https://image.tmdb.org/t/p/original${backgroundImage}")`
+  );
+
   const posterContainer = document.createElement("div");
   const poster = document.createElement("img");
   posterContainer.classList.add("poster-container");

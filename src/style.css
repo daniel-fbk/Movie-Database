@@ -7,9 +7,16 @@
   font-family: roboto;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 main {
   display: flex;
-  background-color: gray;
+  justify-content: center;
+  /* background-color: #161616; */
 }
 
 a {
@@ -29,13 +36,46 @@ li {
 h1,
 h3,
 p {
-  color: rgb(245, 245, 245);
+  color: #f5f5f5;
+}
+
+#header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 95px;
+  opacity: 0.7;
+  background-color: transparent;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(
+    to bottom,
+    #14181c,
+    rgba(20, 24, 28, 0.945) 16.56%,
+    rgba(20, 24, 28, 0.8) 30.85%,
+    rgba(20, 24, 28, 0.608) 43.77%,
+    rgba(20, 24, 28, 0.392) 56.23%,
+    rgba(20, 24, 28, 0.2) 69.15%,
+    rgba(20, 24, 28, 0.055) 83.44%,
+    rgba(20, 24, 28, 0)
+  );
+  z-index: -1;
 }
 
 header {
   display: flex;
-  justify-content: center;
-  background-color: #ffcc00;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  gap: 7em;
+}
+
+.label {
+  color: #dae0e7;
+}
+
+#home-name {
+  /* padding-left: 15%; */
 }
 
 #search-bar {
@@ -55,10 +95,10 @@ header {
 }
 
 #live-search-dropdown {
-  /* display: none; */
-  background-color: #313131;
+  background-color: #1f1f1f;
   width: 40rem;
   position: absolute;
+  z-index: 100;
 }
 
 .suggested-container {
@@ -66,6 +106,11 @@ header {
   align-items: center;
   height: 100px;
   border-bottom: 1px solid #656565;
+}
+
+.suggested-container:hover {
+  background-color: #313131;
+  cursor: pointer;
 }
 
 .suggested-poster-container {
@@ -78,8 +123,11 @@ header {
 
 .suggested-poster {
   height: 100%;
+}
+
+.suggested-poster-fallback {
+  height: 100%;
   width: 100%;
-  object-fit: cover;
 }
 
 .suggested-info {
@@ -92,31 +140,45 @@ header {
   margin-bottom: 0.3em;
 }
 
-#movie-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-#bookmarks {
-  padding: 10px;
-  width: 20rem;
-  height: 95vh;
-  background-color: rgb(50, 50, 50);
-}
-
 .movie-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 60%;
-  background-color: rgb(22, 22, 22);
-  border: solid 1.5px black;
+  width: 50%;
+  margin: 1em 0;
+  position: relative;
+}
+
+#wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#wrapper::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  background-image: var(--bg-url);
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
 }
 
 .poster {
   height: 300px;
+}
+
+#bookmarks {
+  display: none;
+  padding: 10px;
+  width: 20rem;
+  height: 95vh;
+  background-color: rgb(50, 50, 50);
 }
 
 .bookmark-button {
