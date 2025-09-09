@@ -39,7 +39,8 @@ const buildLiveSearch = async () => {
     return;
   }
 
-  suggestions.slice(0, 8).forEach(async (movie) => {
+  for (const movie of suggestions.slice(0, 8)) {
+    console.log(movie);
     let movieId = movie.id;
     const creditsData = await fetchMovieCredits(movieId);
     const { cast } = creditsData;
@@ -97,7 +98,7 @@ const buildLiveSearch = async () => {
     actorsContainer.append(suggestedActors);
 
     liveSearchDropdown.append(suggestedMovie);
-  });
+  }
 };
 
 searchBar.addEventListener("input", () => {

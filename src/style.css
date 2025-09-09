@@ -70,7 +70,7 @@ p {
   background-image: var(--bg-url);
   background-size: cover;
   background-position: center;
-  filter: blur(13px);
+  filter: blur(2px);
   z-index: -1;
 }
 
@@ -85,12 +85,20 @@ p {
   z-index: -1;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  height: 75px;
+}
+
 #header-bg {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 95px;
+  height: 100px;
   opacity: 0.7;
   background-color: transparent;
   background-repeat: repeat-x;
@@ -108,13 +116,6 @@ p {
   z-index: -1;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10%;
-}
-
 #main-nav {
   display: flex;
   gap: 1em;
@@ -128,16 +129,47 @@ header {
   /* padding-left: 15%; */
 }
 
+#search-wrapper {
+  position: relative;
+}
+
 #search-bar {
   height: 2rem;
   width: 36rem;
+  padding-left: 5px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  letter-spacing: 0.2px;
+  color: rgba(0, 0, 0, 0.87);
+  caret-color: rgba(0, 0, 0, 0.54);
+  background-color: rgba(255, 255, 255, 0.25);
+  line-height: 25px;
+  position: relative;
+}
+
+#search-bar:focus {
+  outline: none;
+  background-color: #f8f8f8;
 }
 
 #submit {
-  height: 2rem;
-  width: 10ch;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  background-color: inherit;
+
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-icon {
+  color: #cdcdcd;
 }
 
 #nav-search-form {

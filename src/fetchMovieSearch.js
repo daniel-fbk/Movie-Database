@@ -8,7 +8,6 @@ export const fetchMovieSearch = async (title, type) => {
   );
   const data = await response.json();
   const results = data.results;
-  console.log(results);
 
   if (type === "input") {
     return results;
