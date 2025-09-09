@@ -32,7 +32,7 @@ export const getFilters = () =>
 export const bookmarkButton = (title, popularity) => {
   const bookmarkBtn = document.createElement("button");
   bookmarkBtn.classList.add("bookmark-button");
-  bookmarkBtn.textContent = "Bookmark";
+  bookmarkBtn.textContent = "Favorite";
 
   bookmarkBtn.addEventListener("click", () => {
     const movieObj = { title, popularity };

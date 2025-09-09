@@ -1,5 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900");
 
+#bookmarks {
+  display: none;
+  padding: 10px;
+  width: 20rem;
+  height: 95vh;
+  background-color: rgb(50, 50, 50);
+}
+
+.bookmark-button {
+  display: none;
+  background-color: #ffcc00;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 10rem;
+}
+.bookmark-button:hover {
+  background-color: #e6b800;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -39,6 +60,31 @@ p {
   color: #f5f5f5;
 }
 
+#wrapper::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  background-image: var(--bg-url);
+  background-size: cover;
+  background-position: center;
+  filter: blur(13px);
+  z-index: -1;
+}
+
+#wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
 #header-bg {
   position: absolute;
   top: 0;
@@ -65,9 +111,13 @@ p {
 header {
   display: flex;
   align-items: center;
-  width: 80%;
-  margin: 0 auto;
-  gap: 7em;
+  justify-content: center;
+  gap: 10%;
+}
+
+#main-nav {
+  display: flex;
+  gap: 1em;
 }
 
 .label {
@@ -80,7 +130,7 @@ header {
 
 #search-bar {
   height: 2rem;
-  width: 40rem;
+  width: 36rem;
 }
 
 #submit {
@@ -96,7 +146,7 @@ header {
 
 #live-search-dropdown {
   background-color: #1f1f1f;
-  width: 40rem;
+  width: 36rem;
   position: absolute;
   z-index: 100;
 }
@@ -144,7 +194,7 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 50%;
+  width: 70%;
   margin: 1em 0;
   position: relative;
 }
@@ -155,40 +205,10 @@ header {
   height: 100vh;
 }
 
-#wrapper::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  width: calc(100% + 40px);
-  height: calc(100% + 40px);
-  background-image: var(--bg-url);
-  background-size: cover;
-  background-position: center;
-  filter: blur(8px);
-  z-index: -1;
-}
-
 .poster {
-  height: 300px;
-}
-
-#bookmarks {
-  display: none;
-  padding: 10px;
-  width: 20rem;
-  height: 95vh;
-  background-color: rgb(50, 50, 50);
-}
-
-.bookmark-button {
-  background-color: #ffcc00;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 10rem;
-}
-.bookmark-button:hover {
-  background-color: #e6b800;
+  height: 500px;
+  outline: solid 2px rgba(255, 255, 255, 0.247);
+  outline-offset: -2px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
 }
