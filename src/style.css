@@ -98,8 +98,15 @@ p {
 header {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   height: 75px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
 }
 
 #header-bg {
@@ -135,7 +142,7 @@ header {
 }
 
 #home-name {
-  /* padding-left: 15%; */
+  font-size: 1.25rem;
 }
 
 #search-wrapper {
@@ -271,7 +278,7 @@ header {
 .genre-year-age-time {
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: 2rem 0 3rem;
 }
 
 .genres-container {
@@ -329,5 +336,4 @@ header {
 
 .homepage {
   display: none;
-  margin: auto 0 2rem;
 }
