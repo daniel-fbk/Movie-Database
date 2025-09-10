@@ -1,11 +1,13 @@
 import { bookmarkButton } from "./localStorage.js";
 import { fetchMovieImages } from "./fetchMovieImages.js";
 
-const movieContainer = document.querySelector(".movie-container");
 const wrapper = document.getElementById("wrapper");
+const movieContainer = document.querySelector(".movie-container");
 
 export const buildPage = async (movie) => {
   const movieData = movie;
+  const time =
+    Math.floor(movieData.runtime / 60) + "h " + (movieData.runtime % 60) + "m";
   const { title, popularity } = movieData;
   movieContainer.replaceChildren();
 
@@ -51,7 +53,7 @@ export const buildPage = async (movie) => {
 
   const runTime = document.createElement("p");
   runTime.classList.add("run-time");
-  runTime.textContent = `Runtime: ${movie.runtime} minutes`;
+  runTime.textContent = time;
 
   const ratingContainer = document.createElement("div");
   const ratingStar = document.createElement("img");
@@ -60,31 +62,34 @@ export const buildPage = async (movie) => {
   ratingStar.classList.add("rating-star");
   rating.classList.add("rating");
 
-  const revenue = document.createElement("p");
-  revenue.classList.add("revenue");
-  revenue.textContent = `$${movie.revenue}`;
-
   const homePage = document.createElement("a");
   homePage.classList.add("homepage");
   homePage.textContent = `HomePage ${movie.homepage}`;
   homePage.href = movie.homepage;
   homePage.target = "_blank";
 
+  const movieDetails = document.createElement("article");
+  movieDetails.classList.add("movie-details");
+
+  const genreYearAgeTime = document.createElement("div");
+  genreYearAgeTime.classList.add("genre-year-age-time");
+
   movieContainer.append(
     posterContainer,
+    movieDetails,
+    bookmarkButton(title, popularity)
+  );
+  movieDetails.append(
     movieTitle,
-    genresContainer,
+    genreYearAgeTime,
     description,
-    releaseDate,
-    ageRating,
-    runTime,
     ratingContainer,
-    revenue,
     homePage
   );
-  movieContainer.prepend(bookmarkButton(title, popularity));
   posterContainer.append(poster);
   ratingContainer.append(ratingStar, rating);
+  genreYearAgeTime.append(genresContainer, releaseDate, ageRating, runTime);
+  // genreYearAgeTime.append(releaseDate, ageRating, runTime, genresContainer);
 };
 
 // const crewContainer = document.createElement("div");

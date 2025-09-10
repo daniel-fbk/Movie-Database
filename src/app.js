@@ -1,27 +1,9 @@
-/* Todo
-
-Create a data dashboard with data on movies, like IMDb
-Things to get from API:
-Title, description, poster, genres, runtime, votes, languages, actors, release date, trailer, images, reviews
-
-Use methods like:
-map()
-filter()
-sort()
-reduce()
-
-Destructuring to get relevant values from objects and arrays
-
-*/
-
 import "./style.css";
 
 // Import modules
 import { handleSearch } from "./handleSearch.js";
 import { fetchMoviesPopular } from "./fetchMoviesPopular.js";
-import { getBookmarks } from "./localStorage.js";
 
 //Event Listeners
 
 fetchMoviesPopular();
-getBookmarks();

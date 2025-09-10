@@ -60,6 +60,16 @@ p {
   color: #f5f5f5;
 }
 
+#title-red {
+  color: rgb(222, 0, 0);
+}
+
+#wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
 #wrapper::before {
   content: "";
   position: absolute;
@@ -88,8 +98,7 @@ p {
 header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10%;
+  justify-content: space-evenly;
   height: 75px;
 }
 
@@ -177,10 +186,12 @@ header {
 }
 
 #live-search-dropdown {
+  position: absolute;
+  top: 35px;
   background-color: #1f1f1f;
   width: 36rem;
-  position: absolute;
-  z-index: 100;
+  z-index: 999;
+  border-radius: 6px;
 }
 
 .suggested-container {
@@ -188,6 +199,10 @@ header {
   align-items: center;
   height: 100px;
   border-bottom: 1px solid #656565;
+}
+
+.suggested-container:last-child {
+  border-bottom: none;
 }
 
 .suggested-container:hover {
@@ -224,23 +239,95 @@ header {
 
 .movie-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 70%;
-  margin: 1em 0;
+  gap: 70px;
+  width: 80%;
+  margin: 5em 0;
   position: relative;
-}
-
-#wrapper {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
 }
 
 .poster {
-  height: 500px;
+  height: 550px;
   outline: solid 2px rgba(255, 255, 255, 0.247);
   outline-offset: -2px;
   border-radius: 15px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+}
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 0.4rem;
+}
+
+.movie-title {
+  font-size: 4rem;
+  font-weight: 450;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2), -1px -1px 2px rgba(0, 0, 0, 0.2);
+  text-wrap: balance;
+  padding-top: 3rem;
+}
+
+.genre-year-age-time {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.genres-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding-right: 2rem;
+  font-size: 0.875rem;
+}
+
+.genres {
+  background-color: rgb(33, 32, 32);
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.description {
+  width: 75%;
+  line-height: 1.7rem;
+  color: #dbdbdb;
+}
+
+.release-date {
+  color: #dbdbdb;
+}
+
+.age-rating {
+  color: #dbdbdb;
+}
+
+.age-rating::before {
+  content: "•";
+  padding: 0 0.6rem;
+  font-size: 0.875rem;
+}
+
+.age-rating::after {
+  content: "•";
+  padding: 0 0.6rem;
+  font-size: 0.875rem;
+}
+
+.run-time {
+  color: #dbdbdb;
+}
+
+.rating-container {
+}
+
+.rating-star {
+}
+
+.rating {
+}
+
+.homepage {
+  display: none;
+  margin: auto 0 2rem;
 }

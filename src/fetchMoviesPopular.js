@@ -7,6 +7,6 @@ export const fetchMoviesPopular = async () => {
     `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${apiKey}`
   );
   const data = await response.json();
-  const results = data.results[5].id;
+  const results = data.results[10].id;
   fetchMovieDetails(results);
 };

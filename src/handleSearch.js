@@ -31,26 +31,25 @@ const buildLiveSearch = async () => {
 
   liveSearchDropdown.replaceChildren();
 
-  // console.log(await fetchMovieSearch(userInput, apiKey));
-
   const suggestions = await fetchMovieSearch(userInput, "input");
+  const limitedSuggestions = suggestions.slice(0, 6);
 
-  if (!suggestions || suggestions.length === 0) {
-    return;
-  }
+  const moviesWithCredits = await Promise.all(
+    limitedSuggestions.map(async (movie) => {
+      const creditsData = await fetchMovieCredits(movie.id);
+      return { ...movie, cast: creditsData.cast };
+    })
+  );
 
-  for (const movie of suggestions.slice(0, 8)) {
-    console.log(movie);
-    let movieId = movie.id;
-    const creditsData = await fetchMovieCredits(movieId);
-    const { cast } = creditsData;
-    // Poster, Title, Release Year, 2 actors
+  console.log(moviesWithCredits);
+
+  moviesWithCredits.forEach((movie) => {
     const suggestedMovie = document.createElement("div");
     suggestedMovie.classList.add("suggested-container");
 
     suggestedMovie.addEventListener("click", async () => {
       liveSearchDropdown.replaceChildren();
-      fetchMovieDetails(movieId);
+      fetchMovieDetails(movie.id);
     });
 
     const suggestedPosterContainer = document.createElement("div");
@@ -72,14 +71,13 @@ const buildLiveSearch = async () => {
     suggestedTitle.textContent = movie.title;
 
     const suggestedReleaseYear = document.createElement("p");
-    suggestedReleaseYear.classList.add("suggested-info");
-    suggestedReleaseYear.classList.add("suggested-year");
+    suggestedReleaseYear.classList.add("suggested-info", "suggested-year");
     suggestedReleaseYear.textContent = movie.release_date.slice(0, 4);
 
     const actorsContainer = document.createElement("div");
     actorsContainer.classList.add("actors-container");
 
-    const firstTwoActors = cast
+    const firstTwoActors = movie.cast
       .slice(0, 2)
       .map((actor) => actor.name)
       .join(", ");
@@ -98,7 +96,7 @@ const buildLiveSearch = async () => {
     actorsContainer.append(suggestedActors);
 
     liveSearchDropdown.append(suggestedMovie);
-  }
+  });
 };
 
 searchBar.addEventListener("input", () => {
