@@ -1,11 +1,7 @@
 import { renderPage } from "./render.js";
 
-const apiKey = process.env.API_KEY;
-
 export const fetchMovieDetails = async (id) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
-  );
+  const response = await fetch(`/.netlify/functions/movieDetailsApi?id=${id}`);
   const data = await response.json();
   const results = data;
   renderPage(results);

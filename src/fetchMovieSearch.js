@@ -1,10 +1,8 @@
 import { fetchMovieDetails } from "./fetchMovieDetails.js";
 
-const apiKey = process.env.API_KEY;
-
 export const fetchMovieSearch = async (title, type) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${title}&api_key=${apiKey}`
+    `/.netlify/functions/movieSearchApi?title=${title}`
   );
   const data = await response.json();
   const results = data.results;
