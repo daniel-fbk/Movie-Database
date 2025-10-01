@@ -14,3 +14,4 @@ A Work in Progress movie database website inspired by IMDB, powered by [TMDB API
 - CSS
 - JavaScript
 - Parcel
+- Netlify Serverless Functions
